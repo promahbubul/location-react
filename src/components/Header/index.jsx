@@ -8,14 +8,19 @@ const Header = () => {
   });
 
   const handleLocation = () => {
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
       (position) => {
         setCurrentLocation({
           lat: position.coords.latitude,
           long: position.coords.longitude,
         });
       },
-      (error) => console.error(error)
+      (error) => console.error(error),
+      {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 5000,
+      }
     );
   };
   console.log(currentLocation);
